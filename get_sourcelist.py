@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import pycurl
 from io import BytesIO
@@ -28,4 +29,7 @@ def get_repo_review(review_id):
     list_file.write(source_list_rpa)
     list_file.close()
 
-get_repo_review(119)
+if __name__ == '__main__':
+    print(sys.argv[1])
+    review_id = sys.argv[1]
+    get_repo_review(review_id)
