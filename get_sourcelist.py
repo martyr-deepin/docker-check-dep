@@ -1,16 +1,12 @@
 import os
 import sys
 import json
-import pycurl
-from io import BytesIO
 
-RR_URL = 'https://rr.deepin.io/api/v1/review/%s'
-
-def get_repo_review(review_id):
-    base = data['result']['base']
-    base_codename = data['result']['base_codename']
-    rpa = data['result']['rpa']
-    rpa_codename = data['result']['rpa_codename']
+def get_repo_review():
+    base = os.environ(BASE)
+    base_codename = os.environ(BASE_CODENAME)
+    rpa = os.environ(RPA)
+    rpa_codename = os.environ(RPA_CODENAME)
     source_list_base = "deb %s %s main contrib non-free" % (base, base_codename)
     source_list_rpa = "deb %s %s main contrib non-free" % (rpa, rpa_codename)
     list_file = open('sources.list', 'w')
@@ -20,6 +16,4 @@ def get_repo_review(review_id):
     list_file.close()
 
 if __name__ == '__main__':
-    print(sys.argv[1])
-    review_id = sys.argv[1]
-    get_repo_review(review_id)
+    get_repo_review()
