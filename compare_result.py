@@ -1,3 +1,5 @@
+import os
+review_id = os.environ['REVIEW_ID']
 orig_list = []
 orig_file = open('orig.list', 'r')
 for line in open('orig.list'):
@@ -16,6 +18,9 @@ for line in open('record.rd'):
 result_file.close()
 
 if len(added_list) > 0:
+    output = open('output-%s' % review_id, 'w')
+    output.write(str(added_list))
+    output.close()
     print(added_list)
 else:
     print("no new issue found")
