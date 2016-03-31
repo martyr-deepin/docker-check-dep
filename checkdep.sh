@@ -1,5 +1,6 @@
 #!/bin/bash
 source /docker-check-dep/params.env
+apt-get update
 apt-get -y install python python-apt coreutils python-pycurl
 python /docker-check-dep/get_sourcelist.py
 rm /etc/apt/sources.list
