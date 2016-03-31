@@ -6,5 +6,6 @@ python /docker-check-dep/get_sourcelist.py
 rm /etc/apt/sources.list
 cp sources.list /etc/apt/
 apt-get -y update
+cd /docker-check-dep
 python /docker-check-dep/AutoAPT.py -m cb -f
 python /docker-check-dep/compare_result.py
