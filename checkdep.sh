@@ -7,3 +7,4 @@ rm /etc/apt/sources.list
 cp sources.list /etc/apt/
 apt-get -y update
 python /docker-check-dep/AutoAPT.py -m cb -f
+python compare_result.py
