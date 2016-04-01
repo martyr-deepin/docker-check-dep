@@ -8,4 +8,5 @@ cp sources.list /etc/apt/
 apt-get -y update
 cd /docker-check-dep
 python /docker-check-dep/AutoAPT.py -m cb -f
+cat record.rd || echo "record.rd not found"
 python /docker-check-dep/compare_result.py
