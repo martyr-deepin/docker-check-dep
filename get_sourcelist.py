@@ -9,11 +9,12 @@ def get_repo_review():
     rpa_codename = os.environ['RPA_CODENAME']
     source_list_base = "deb %s %s main contrib non-free" % (base, base_codename)
     source_list_rpa = "deb %s %s main contrib non-free" % (rpa, rpa_codename)
-    list_file = open('sources.list', 'w')
-    list_file.write(source_list_base)
-    list_file.write("\n")
-    list_file.write(source_list_rpa)
-    list_file.close()
+    base_list_file = open('base.list', 'w')
+    base_list_file.write(source_list_base)
+    base_list_file.close()
+    rpa_list_file = open('rpa.list', 'w')
+    rpa_list_file.write(source_list_rpa)
+    rpa_list_file.close()
 
 if __name__ == '__main__':
     get_repo_review()
