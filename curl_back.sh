@@ -9,6 +9,7 @@ if [[ ${cmd_res} == 0 ]]; then
 if [ -f $PWD/output-$review_id ]
 then
 curl -X POST -H Access-Token:${CHECK_TOKEN} ${host_api}/test_result/${review_id} -d "passed=0&comment=check dep not pass.\njob details: <a target=\"_blank\" href=\"${BUILD_URL}/console\">${BUILD_URL}</a> "
+rm $PWD/output-$review_id
 else
 curl -X POST -H Access-Token:${CHECK_TOKEN} ${host_api}/test_result/${review_id} -d "passed=1&comment=check dep pass.\njob details: <a target=\"_blank\" href=\"${BUILD_URL}/console\">${BUILD_URL}</a> "
 fi
