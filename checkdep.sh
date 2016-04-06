@@ -8,6 +8,8 @@ rm /etc/apt/sources.list
 mv base.list /etc/apt/sources.list.d/
 apt-get -y update
 python /docker-check-dep/AutoAPT.py -m cb -f
+echo "packages with dependency issues in base repo:"
+cat record.rd
 mv record.rd orig.list
 mv rpa.list /etc/apt/sources.list.d/
 apt-get -y update
