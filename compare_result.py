@@ -21,6 +21,7 @@ if len(added_list) > 0:
     output = open('output-%s' % review_id, 'w')
     output.write(str(added_list))
     output.close()
+    print("those packages have dependency problem:")
     print(added_list)
 else:
     print("no new issue found")
