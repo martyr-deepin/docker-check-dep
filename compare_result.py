@@ -19,10 +19,12 @@ result_file.close()
 
 if len(added_list) > 0:
     output = open('output-%s' % review_id, 'w')
-    output.write(str(added_list))
+    for pkg in added_list:
+        output.write(pkg)
+        output.write('\n')
     output.close()
-    print("those packages have dependency problem:")
-    print(added_list)
+    #print("those packages have dependency problem:")
+    #print(added_list)
 else:
     print("no new issue found")
 

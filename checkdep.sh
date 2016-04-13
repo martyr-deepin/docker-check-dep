@@ -17,3 +17,4 @@ python /docker-check-dep/AutoAPT.py -m cb -f
 echo "packages with dependency issues in merged repo:"
 cat record.rd
 python /docker-check-dep/compare_result.py
+bash get_dep_details.sh
