@@ -14,6 +14,6 @@ mv record.rd orig.list
 mv rpa.list /etc/apt/sources.list.d/
 apt-get -y update
 python /docker-check-dep/AutoAPT.py -m cb -f
+cat record.rd
 python /docker-check-dep/compare_result.py
 echo "packages with dependency issues in merged repo:"
-cat record.rd
