@@ -146,7 +146,7 @@ class CheckBroken(object):
 
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option("-m", metavar="CHECK_MODE", dest="check_mode", help="cb: check broken package. cf: check installed files of debs", type="string", action="store")
+    parser.add_option("-m", metavar="CHECK_MODE", dest="check_mode", help="cb: check broken package.", type="string", action="store")
 
     parser.add_option("-f", dest="with_filter", action="store_true",help="filter packages")
     (options, args) = parser.parse_args()
@@ -155,8 +155,6 @@ if __name__ == '__main__':
     arg_mode = options.check_mode
     if arg_mode == "cb":
         mode = "CHECK_BROKEN"
-    elif arg_mode == "cf":
-        mode = "CHECK_INST_FILES"
 
     with_filter = options.with_filter
     if None in (mode, with_filter):
