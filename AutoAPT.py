@@ -5,6 +5,7 @@ import apt_pkg
 import apt.debfile
 import platform
 from optparse import OptionParser
+import multiprocessing
 
 class CheckBroken(object):
     """AutoAPT: a series of auto tests for package system"""
@@ -47,7 +48,7 @@ class CheckBroken(object):
         elif sys_pf[0] == "32bit":
             return "i386"
         else:
-            print "Unknow system platform.\n %s"%sys_pf[0]
+            print("Unknow system platform.\n %s"%sys_pf[0])
             quit()
 
     def get_filter_filenames(self):
@@ -93,55 +94,50 @@ class CheckBroken(object):
         return False
 
     def usage(self, **args):
-        print "help .... "
+        print("help .... ")
 
     def check_broken(self):
         # all packages
         packages = self.pkg_cache.packages
 
+        processes = []
         for p in packages:
-            pkg_name = ""
-            if self.pkg_arch == "i386":
-                pkg_name = p.name
-            else:
-                pkg_name = p.get_fullname()
+            #self.check_package(p)
+            process = multiprocessing.Process(target=self.check_package, args=[p])
+            processes.append(process)
+        for process in processes:
+            process.start()
+        for process in processes:
+            process.join()
 
-            #print "\npackage: %s"%pkg_name
 
-            try:
-                # get package
-                if pkg_name not in self.apt_cache:
-                    # I think it should be done sth here.
-                    #print ("Package (%s) not found in apt's cache"%pkg_name)
-                    continue
-                package = self.apt_cache[pkg_name]
+    def check_package(self, p):
+        pkg_name = ""
+        if self.pkg_arch == "i386":
+            pkg_name = p.name
+        else:
+            pkg_name = p.get_fullname()
 
-                if self.with_filter:
-                    if not self.package_filter(p):
-                        #print "Not in the detection range, skip"
-                        continue
-                    else:
-                        pass
-                        #print "package: %s " %pkg_name
-                        #quit()
+        try:
+            if pkg_name not in self.apt_cache:
+                return
+            package = self.apt_cache[pkg_name]
 
-                # get package name
-                pkg_name = package.fullname
-
-                # ckeck broken
-                package.mark_install()
-                #print "package: %s, through"%pkg_name
-
-            except SystemError, e:
-               # print package
-                #print  "\n*** Package: %s not through *** \n error:[%s]" %(pkg_name, str(e))
-                self.record(package, str(e))
-                self.apt_cache.clear()
+            if self.with_filter:
+                if not self.package_filter(p):
+                    return
+            #pkg_name = package.fullname
+            package.mark_install()
+        except SystemError as e:
+            #print(package)
+            self.record(package, str(e))
+            self.apt_cache.clear()
 
     def record(self, package, err):
         write_str = "%s \n" %(package)
         #write_str = "Package: %s\nErrorInfo: %s\n\n" %(pkg_name, err)
         self.record_file.write(write_str)
+        self.record_file.close()
 
 
 if __name__ == '__main__':
