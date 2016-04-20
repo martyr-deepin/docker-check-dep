@@ -6,6 +6,7 @@ then
     do
         if ! apt-get --dry-run install $a > /dev/null
         then
+            echo $a >> resultpkg.log
             echo $a >> result.log
             apt-get --dry-run install $a 2>&1|grep "Depends:" >> result.log
             echo " " >> result.log
@@ -14,4 +15,7 @@ then
 else
     echo "no issues found" > result.log
 fi
+echo "依赖问题详细信息："
 cat result.log
+echo "======================================================================================================================"
+python get_reverse_dep.py
