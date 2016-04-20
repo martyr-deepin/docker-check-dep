@@ -12,6 +12,7 @@ then
             echo " " >> result.log
         fi
     done < output-$REVIEW_ID
+rm $PWD/output-$REVIEW_ID
 else
     echo "no issues found" > result.log
 fi
