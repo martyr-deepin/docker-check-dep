@@ -19,4 +19,8 @@ fi
 echo "依赖问题详细信息："
 cat result.log
 echo "======================================================================================================================"
-python get_reverse_dep.py
+if [ -f $PWD/resultpkg.log ]
+then
+    python get_reverse_dep.py
+    rm $PWD/resultpkg.log || echo "resultpkg.log not found"
+fi

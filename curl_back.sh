@@ -11,6 +11,7 @@ then
 curl -X POST -H Access-Token:${CHECK_TOKEN} ${host_api}/test_result/${review_id} -d "passed=0&comment=依赖检测未通过.\n`cat $PWD/final.log`\njob details: ${BUILD_URL}console"
 rm $PWD/result.log
 rm $PWD/resultpkg.log || echo "resultpkg.log not found"
+rm $PWD/final.log || echo "final.log not found"
 else
 curl -X POST -H Access-Token:${CHECK_TOKEN} ${host_api}/test_result/${review_id} -d "passed=1&comment=依赖检测通过.\njob details: ${BUILD_URL}console"
 fi
