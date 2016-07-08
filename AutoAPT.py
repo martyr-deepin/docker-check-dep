@@ -26,7 +26,7 @@ class CheckBroken(object):
         self.apt_cache = apt.cache.Cache()
 
         # construct file filters
-        self.file_filter = ["deepin", "Deepin"]
+        self.file_filter = ["deepin", "Deepin", "Debian"]
 
         # if just check the pkgs in included by file_filter
         self.with_filter = with_filter
