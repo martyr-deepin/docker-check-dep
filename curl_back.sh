@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 
 cmd_res=$1
 host_api=$2
