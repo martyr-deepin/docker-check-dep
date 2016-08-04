@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 host_api=$1
 review_id=$2
 BUILD_URL=$3
