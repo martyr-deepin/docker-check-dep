@@ -20,4 +20,3 @@ fi
 else
 	curl -X POST -H Access-Token:${CHECK_TOKEN} ${host_api}/test_result/${review_id} -d "passed=0&comment=依赖检测失败.\njob details: ${BUILD_URL}console"
 fi
-rm record.rd || echo "record.rd not found"
