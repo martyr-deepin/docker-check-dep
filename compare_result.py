@@ -10,10 +10,11 @@ orig_file.close()
 
 result_list = []
 added_list = []
+filter_list = ['python-pycuda','python-pycuda-dbg']
 result_file = open('record.rd', 'r')
 for line in open('record.rd'):
     line = result_file.readline().strip(' \n')
-    if not line in orig_list:
+    if line not in orig_list and line not in filter_list:
         added_list.append(line)
 result_file.close()
 
