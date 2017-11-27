@@ -10,7 +10,7 @@ orig_file.close()
 
 result_list = []
 added_list = []
-filter_list = ['python3-pycuda','python3-pycuda-dbg']
+filter_list = ['python3-pycuda','python3-pycuda-dbg','python-pycuda','python-pycuda-dbg']
 result_file = open('record.rd', 'r')
 for line in open('record.rd'):
     line = result_file.readline().strip(' \n')
